@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Angular 2 bootstraps the root app component here -->
+<app>
+    <h1>Loading...</h1>
+</app>
+
+@section scripts{
+    <!-- Load the SystemJS configuration -->
+    <script src="~/systemjs.config.js"></script>
+    <!-- Initialize the SystemJS module loader -->
+    <script>
+        System.import('app').catch(function (err) { console.error(err); });
+    </script>
+}

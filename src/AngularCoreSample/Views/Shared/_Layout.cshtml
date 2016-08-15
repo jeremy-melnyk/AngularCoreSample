@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- Set the base href for Angular 2 -->
+    <base href="/">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - AngularCoreSample</title>
+    <!-- Load bootstrap CSS -->
+    <environment names="Development">
+        <link rel="stylesheet" type="text/css" href="~/lib/npm/bootstrap/darkly-bootstrap.min.css"/>
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" type="text/css" href="~/lib/npm/bootstrap/darkly-bootstrap.min.css" />
+    </environment>
+</head>
+<body>
+    <!-- Render body of the application -->
+    @RenderBody()
+    <!-- Polyfill(s) for older browsers -->
+    <environment names="Development">
+        <script src="~/lib/npm/core-js/shim.js"></script>
+        <script src="~/lib/npm/zone.js/zone.js"></script>
+        <script src="~/lib/npm/reflect-metadata/Reflect.js"></script>
+        <script src="~/lib/npm/systemjs/system.src.js"></script>
+
+    </environment>
+    <environment names="Staging,Production">
+        <script src="~/lib/npm/core-js/shim.min.js"></script>
+        <script src="~/lib/npm/zone.js/zone.min.js"></script>
+        <script src="~/lib/npm/reflect-metadata/Reflect.js"></script>
+        <script src="~/lib/npm/systemjs/system.src.js"></script>
+    </environment>
+    <!-- Load additional scripts from Index.cshtml -->
+    @RenderSection("scripts", required: false)
+</body>
+</html>
