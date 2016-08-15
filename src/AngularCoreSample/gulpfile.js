@@ -20,14 +20,15 @@ var paths = {
     minCss: webroot + 'app/**/*.min.css',
     concatJsDest: webroot + 'app/app.min.js',
     concatCssDest: webroot + 'app/app.min.css',
-    npmSrc: './node_modules/',
+    npmSrc: './node_modules',
     npmLibs: webroot + 'lib/npm/',
     tsInput: './scripts/app/**/*.ts',
     tsOutput: webroot + 'app/',
     sassInput: './scripts/app/**/*.scss',
     sassOutput: webroot + 'app/',
     htmlInput: './scripts/app/**/*.html',
-    htmlOutput: webroot + 'app/'
+    htmlOutput: webroot + 'app/',
+    themes: './themes'
 };
 
 gulp.task('clean:js', function (cb) {
@@ -114,7 +115,12 @@ gulp.task('copy-deps:bootstrap-fonts', function () {
          .pipe(gulp.dest(paths.npmLibs + '/fonts/'));
 });
 
-gulp.task('copy-deps', ['copy-deps:@angular', 'copy-deps:systemjs', 'copy-deps:core-js', 'copy-deps:reflect-metadata', 'copy-deps:rxjs', 'copy-deps:zone.js', 'copy-deps:jquery', 'copy-deps:bootstrap-js', 'copy-deps:bootstrap-css', 'copy-deps:bootstrap-fonts']);
+gulp.task('copy-deps:bootstrap-themes', function () {
+    return gulp.src(paths.themes + '/*.{css,css.map,min.css,min.css.map}', { base: paths.themes + '/' })
+         .pipe(gulp.dest(paths.npmLibs + '/bootstrap/'));
+});
+
+gulp.task('copy-deps', ['copy-deps:@angular', 'copy-deps:systemjs', 'copy-deps:core-js', 'copy-deps:reflect-metadata', 'copy-deps:rxjs', 'copy-deps:zone.js', 'copy-deps:jquery', 'copy-deps:bootstrap-js', 'copy-deps:bootstrap-css', 'copy-deps:bootstrap-fonts', 'copy-deps:bootstrap-themes']);
 
 gulp.task('typescript', function () {
     var tsResult = gulp.src([paths.tsInput])
